@@ -18,7 +18,7 @@ class TasksTableViewCell: UITableViewCell {
     let taskNameLbl: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.font = UIFont.systemFont(ofSize: 17, weight: .light)
+        label.font = UIFont.systemFont(ofSize: Constant.standardFontSize, weight: .light)
         return label
     }()
     
@@ -68,19 +68,19 @@ class TasksTableViewCell: UITableViewCell {
         
         let taskNameLblConstraints = [
             taskNameLbl.centerYAnchor.constraint(equalTo: centerYAnchor),
-            taskNameLbl.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            taskNameLbl.heightAnchor.constraint(equalToConstant: 30)
+            taskNameLbl.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constant.leadingOffset),
+            taskNameLbl.heightAnchor.constraint(equalToConstant: Constant.lblHeight)
         ]
         
-        let favoriteButtonConstraints = [
-            complitedButton.leadingAnchor.constraint(equalTo: taskNameLbl.trailingAnchor, constant: 20),
-            complitedButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+        let complitedButtonConstraints = [
+            complitedButton.leadingAnchor.constraint(equalTo: taskNameLbl.trailingAnchor, constant: Constant.complitedButtonLeadingOffset),
+            complitedButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constant.trailingOffset),
             complitedButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            complitedButton.heightAnchor.constraint(equalToConstant: 30),
-            complitedButton.widthAnchor.constraint(equalToConstant: 30)
+            complitedButton.heightAnchor.constraint(equalToConstant: Constant.iconHeight),
+            complitedButton.widthAnchor.constraint(equalToConstant: Constant.iconWidth)
         ]
         
-        [taskNameLblConstraints, favoriteButtonConstraints]
+        [taskNameLblConstraints, complitedButtonConstraints]
             .forEach { NSLayoutConstraint.activate($0) }
     }
 }

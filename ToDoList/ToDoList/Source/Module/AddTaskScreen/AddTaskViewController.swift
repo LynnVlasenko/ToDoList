@@ -24,10 +24,9 @@ class AddTaskViewController: UIViewController {
     private let taskNameField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Type Name of Task"
-        textField.setLeftPaddingPoints(20)
-        textField.layer.borderWidth = 0.5
+        textField.setLeftPaddingPoints(Constant.textFieldPadding)
+        textField.layer.borderWidth = Constant.textFieldBorderWidth
         textField.layer.borderColor = UIColor.lightGray.cgColor
-        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -36,10 +35,9 @@ class AddTaskViewController: UIViewController {
         button.setTitle("Create Task", for: .normal)
         button.backgroundColor = .systemGray
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = Constant.buttonCornerRadius
         button.addTarget(self, action: #selector(didTabCreateButton), for: .touchUpInside)
         button.isEnabled = false
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -57,8 +55,9 @@ class AddTaskViewController: UIViewController {
     
     // MARK: - Add Subviews
     private func addSubviews() {
-        view.addSubview(taskNameField)
-        view.addSubview(createButton)
+       
+        [taskNameField, createButton]
+            .forEach { view.addSubview($0) }
     }
     
     // MARK: - Configure Nav Bar
@@ -110,22 +109,26 @@ class AddTaskViewController: UIViewController {
     
     //MARK: - Apply constraints
     private func applyConstraints() {
+        
+        [taskNameField, createButton]
+            .forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        
         let taskNameFieldConstraints = [
-            taskNameField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            taskNameField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constant.taskNameFieldTopOffset),
             taskNameField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             taskNameField.widthAnchor.constraint(equalTo: view.widthAnchor),
-            taskNameField.heightAnchor.constraint(equalToConstant: 50)
+            taskNameField.heightAnchor.constraint(equalToConstant: Constant.taskNameFieldHeight)
         ]
         
         let createButtonConstraints = [
             createButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            createButton.topAnchor.constraint(equalTo: taskNameField.bottomAnchor, constant: 50),
-            createButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-            createButton.heightAnchor.constraint(equalToConstant: 44)
+            createButton.topAnchor.constraint(equalTo: taskNameField.bottomAnchor, constant: Constant.createButtonTopOffset),
+            createButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: Constant.buttonWidthMultiplier),
+            createButton.heightAnchor.constraint(equalToConstant: Constant.buttonHeight)
         ]
         
-        NSLayoutConstraint.activate(taskNameFieldConstraints)
-        NSLayoutConstraint.activate(createButtonConstraints)
+        [taskNameFieldConstraints, createButtonConstraints]
+            .forEach { NSLayoutConstraint.activate($0) }
     }
 }
 

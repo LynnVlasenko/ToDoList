@@ -31,7 +31,7 @@ class TasksViewController: UIViewController {
     let noTasksLbl: UILabel = {
         let label = UILabel()
         label.text = "Please add your first task"
-        label.font = UIFont.systemFont(ofSize: 17, weight: .light)
+        label.font = UIFont.systemFont(ofSize: Constant.standardFontSize, weight: .light)
         return label
     }()
     
@@ -46,7 +46,7 @@ class TasksViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Remove Completed", for: .normal)
         button.setTitleColor(.systemRed, for: .normal)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = Constant.buttonCornerRadius
         button.addTarget(self, action: #selector(didTabRemoveCompletedButton), for: .touchUpInside)
         return button
     }()
@@ -129,7 +129,8 @@ class TasksViewController: UIViewController {
             .forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
             
         let tasksTableConstraints = [
-            tasksTable.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.9),
+            tasksTable.heightAnchor.constraint(equalTo: view.heightAnchor, 
+                                               multiplier: Constant.tasksTableHeightMultiplier),
             tasksTable.widthAnchor.constraint(equalTo: view.widthAnchor)
         ]
         
@@ -140,15 +141,17 @@ class TasksViewController: UIViewController {
         
         let buttonViewConstraints = [
             buttonView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            buttonView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1),
+            buttonView.heightAnchor.constraint(equalTo: view.heightAnchor, 
+                                               multiplier: Constant.buttonViewHeightMultiplier),
             buttonView.widthAnchor.constraint(equalTo: view.widthAnchor)
         ]
         
         let removeCompletedButtonConstraints = [
             removeCompletedButton.centerXAnchor.constraint(equalTo: buttonView.centerXAnchor),
             removeCompletedButton.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor),
-            removeCompletedButton.widthAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 0.5),
-            removeCompletedButton.heightAnchor.constraint(equalToConstant: 44)
+            removeCompletedButton.widthAnchor.constraint(equalTo: buttonView.widthAnchor, 
+                                                         multiplier: Constant.buttonWidthMultiplier),
+            removeCompletedButton.heightAnchor.constraint(equalToConstant: Constant.buttonHeight)
         ]
         
         [tasksTableConstraints, noTasksLblConstraints, buttonViewConstraints, removeCompletedButtonConstraints]
