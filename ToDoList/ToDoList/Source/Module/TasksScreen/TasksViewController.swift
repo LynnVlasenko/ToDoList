@@ -7,14 +7,164 @@
 
 import UIKit
 
-class TasksViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        view.backgroundColor = .systemTeal
-    }
-
-
+// MARK: - Protocol to get a new task name fron textField
+protocol NewTaskDelegate: AnyObject {
+    func didTaskNameField(with text: String)
 }
 
+
+class TasksViewController: UIViewController {
+    
+    // array to save data
+    var tasks = [Task]()
+    
+    // aditional array to check if we have Complited Tasks
+    var isComplietedTasks = [Int]()
+    
+    // MARK: - UI
+     let tasksTable: UITableView = {
+        let table = UITableView()
+        table.register(TasksTableViewCell.self, forCellReuseIdentifier: TasksTableViewCell.identifier)
+        return table
+    }()
+    
+    let noTasksLbl: UILabel = {
+        let label = UILabel()
+        label.text = "Please add your first task"
+        label.font = UIFont.systemFont(ofSize: 17, weight: .light)
+        return label
+    }()
+    
+    let buttonView: UIView = {
+        let contentView = UIView()
+        contentView.backgroundColor = .systemBackground
+        contentView.isHidden = true
+        return contentView
+    }()
+    
+    private lazy var removeCompletedButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Remove Completed", for: .normal)
+        button.setTitleColor(.systemRed, for: .normal)
+        button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(didTabRemoveCompletedButton), for: .touchUpInside)
+        return button
+    }()
+    
+    // MARK: - Override
+    override func viewDidLoad() {
+        super.viewDidLoad()
+       
+        view.backgroundColor = .systemBackground
+        configureNavBar()
+        addSubviews()
+        applyConstraints()
+        applyDelegates()
+    }
+    
+    // MARK: - Add Subviews
+    private func addSubviews() {
+        [noTasksLbl, tasksTable, buttonView]
+            .forEach { view.addSubview($0) }
+        buttonView.addSubview(removeCompletedButton)
+    }
+    
+    // MARK: - Configure Nav Bar
+    private func configureNavBar() {
+        
+        title = "Tasks"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .systemBlue
+        
+        // Navigation Bar Appearance
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .systemBackground
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
+        
+        // Bar Button Items
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(didTapAdd))
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: "Clean",
+            style: .done,
+            target: self,
+            action: #selector(didTapClean))
+        
+        navigationItem.leftBarButtonItem?.tintColor = .systemRed
+    }
+    
+    //MARK: - Actions
+    @objc func didTapAdd() {
+        let vc = AddTaskViewController()
+        vc.delegateSetTasks = self
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func didTapClean() {
+        removeAllTasks()
+        buttonView.isHidden = true
+    }
+    
+    @objc private func didTabRemoveCompletedButton() {
+        removeAllComplitedItem()
+        isComplietedTasks.removeAll()
+        buttonView.isHidden = true
+        debugPrint(tasks)
+    }
+    
+    private func applyDelegates() {
+        tasksTable.delegate = self
+        tasksTable.dataSource = self
+    }
+    
+    // MARK: - Apply constraints
+    private func applyConstraints() {
+        
+        [noTasksLbl, tasksTable, buttonView, removeCompletedButton]
+            .forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+            
+        let tasksTableConstraints = [
+            tasksTable.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.9),
+            tasksTable.widthAnchor.constraint(equalTo: view.widthAnchor)
+        ]
+        
+        let noTasksLblConstraints = [
+            noTasksLbl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            noTasksLbl.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ]
+        
+        let buttonViewConstraints = [
+            buttonView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            buttonView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1),
+            buttonView.widthAnchor.constraint(equalTo: view.widthAnchor)
+        ]
+        
+        let removeCompletedButtonConstraints = [
+            removeCompletedButton.centerXAnchor.constraint(equalTo: buttonView.centerXAnchor),
+            removeCompletedButton.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor),
+            removeCompletedButton.widthAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 0.5),
+            removeCompletedButton.heightAnchor.constraint(equalToConstant: 44)
+        ]
+        
+        [tasksTableConstraints, noTasksLblConstraints, buttonViewConstraints, removeCompletedButtonConstraints]
+            .forEach { NSLayoutConstraint.activate($0) }
+    }
+}
+
+
+// MARK: - Extension for Protocol - SetContactsDelegate
+extension TasksViewController: SetTasksDelegate {
+       
+    func getTask(task: Task) {
+        
+        DispatchQueue.main.async {
+            self.tasks.append(task)
+            self.tasksTable.reloadData()
+        }
+    }
+}
