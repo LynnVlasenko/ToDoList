@@ -66,8 +66,8 @@ extension CoreDataService {
         save(context: context)
     }
     
-    func updateItem(item: CDTasks, isCompleted: Bool, at index: Int) {
-        item.isCompleted = isCompleted
+    func updateItem(item: CDTasks, newName: String) {
+        item.name = newName
         save(context: context)
     }
 }

@@ -92,8 +92,12 @@ extension TasksTableViewCell {
         
         taskNameLbl.text = model.name
         
-        model.isCompleted
-        ? completedButton.setBackgroundImage(UIImage(systemName: "checkmark.square"), for: .normal)
-        : completedButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
+        if model.isCompleted {
+            completedButton.setBackgroundImage(UIImage(systemName: "checkmark.square"), for: .normal)
+            taskNameLbl.textColor = .systemGray
+        } else {
+            completedButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
+            taskNameLbl.textColor = .none
+        }
     }
 }

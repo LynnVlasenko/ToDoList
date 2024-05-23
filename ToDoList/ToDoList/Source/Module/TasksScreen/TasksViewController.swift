@@ -100,6 +100,7 @@ class TasksViewController: UIViewController {
     }
     
     //MARK: - Actions
+    // add button action
     @objc func didTapAdd() {
         
         let vc = AddTaskViewController()
@@ -107,6 +108,7 @@ class TasksViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    // clear button action
     @objc func didTapClean() {
         
         CoreDataService.shared.deleteAllItems()
@@ -114,6 +116,7 @@ class TasksViewController: UIViewController {
         buttonView.isHidden = true
     }
     
+    // remove completed button action
     @objc private func didTabRemoveCompletedButton() {
         
         removeAllCompletedItem()

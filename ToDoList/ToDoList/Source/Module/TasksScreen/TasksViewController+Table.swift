@@ -47,11 +47,13 @@ extension TasksViewController: UITableViewDataSource, UITableViewDelegate {
             
             if isCompleted {
                 cell.completedButton.setBackgroundImage(UIImage(systemName: "checkmark.square"), for: .normal)
+                cell.taskNameLbl.textColor = .systemGray
                 CoreDataService.shared.updateIsCompleted(item: model, isCompleted: isCompleted, at: indexPath.row)
                 self.buttonView.isHidden = false
             } else {
                 cell.completedButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
                 checkCompletedTask()
+                cell.taskNameLbl.textColor = .none
                 CoreDataService.shared.updateIsCompleted(item: model, isCompleted: isCompleted, at: indexPath.row)
             }
         }
@@ -74,5 +76,35 @@ extension TasksViewController: UITableViewDataSource, UITableViewDelegate {
             tableView.deleteRows(at: [indexPath], with: .fade)
             checkCompletedTask()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let model = tasks[indexPath.row]
+        
+        // create alert to edit task
+        let sheet = UIAlertController(title: nil,
+                                      message: nil,
+                                      preferredStyle: .actionSheet)
+        sheet.addAction(UIAlertAction(title: "Cansel", style: .cancel, handler: nil))
+        sheet.addAction(UIAlertAction(title: "Edit", style: .default, handler: { [weak self] _ in
+            
+            let alert = UIAlertController(title: "Edit Item",
+                                          message: "Edit your item",
+                                          preferredStyle: .alert)
+            alert.addTextField(configurationHandler: nil)
+            alert.textFields?.first?.text = model.name
+            alert.addAction(UIAlertAction(title: "Save", style: .cancel, handler: { [weak self] _ in
+                guard let field = alert.textFields?.first, let newName = field.text, !newName.isEmpty else {
+                    return
+                }
+                CoreDataService.shared.updateItem(item: model, newName: newName)
+                self?.getAllItems()
+            }))
+            self?.present(alert, animated: true)
+        }))
+        present(sheet, animated: true)
     }
 }
