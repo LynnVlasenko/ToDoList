@@ -9,7 +9,7 @@ import UIKit
 
 class TasksTableViewCell: UITableViewCell {
     
-    var complitedButtonTabComplition: (() -> ())?
+    var completedButtonTabComplition: (() -> ())?
     
     //MARK: - Identifier
     static let identifier = "TasksTableViewCell"
@@ -22,11 +22,11 @@ class TasksTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var complitedButton: UIButton = {
+    lazy var completedButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
         button.tintColor = .systemBlue
-        button.addTarget(self, action: #selector(didTabComplitedButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTabCompletedButton), for: .touchUpInside)
         return button
     }()
 
@@ -49,21 +49,21 @@ class TasksTableViewCell: UITableViewCell {
     // MARK: - Add subviews
     private func addSubviews() {
         
-        [taskNameLbl, complitedButton]
+        [taskNameLbl, completedButton]
             .forEach { self.addSubview($0) }
     }
     
     // MARK: - Actions
-    @objc private func didTabComplitedButton() {
+    @objc private func didTabCompletedButton() {
         
-        complitedButtonTabComplition?()
-        debugPrint("didTabComplitedButton")
+        completedButtonTabComplition?()
+        debugPrint("didTabCompletedButton")
     }
     
     // MARK: - Apply constraints
     private func applyConstraints() {
         
-        [taskNameLbl, complitedButton]
+        [taskNameLbl, completedButton]
             .forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
         let taskNameLblConstraints = [
@@ -72,15 +72,15 @@ class TasksTableViewCell: UITableViewCell {
             taskNameLbl.heightAnchor.constraint(equalToConstant: Constant.lblHeight)
         ]
         
-        let complitedButtonConstraints = [
-            complitedButton.leadingAnchor.constraint(equalTo: taskNameLbl.trailingAnchor, constant: Constant.complitedButtonLeadingOffset),
-            complitedButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constant.trailingOffset),
-            complitedButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            complitedButton.heightAnchor.constraint(equalToConstant: Constant.iconHeight),
-            complitedButton.widthAnchor.constraint(equalToConstant: Constant.iconWidth)
+        let completedButtonConstraints = [
+            completedButton.leadingAnchor.constraint(equalTo: taskNameLbl.trailingAnchor, constant: Constant.completedButtonLeadingOffset),
+            completedButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constant.trailingOffset),
+            completedButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            completedButton.heightAnchor.constraint(equalToConstant: Constant.iconHeight),
+            completedButton.widthAnchor.constraint(equalToConstant: Constant.iconWidth)
         ]
         
-        [taskNameLblConstraints, complitedButtonConstraints]
+        [taskNameLblConstraints, completedButtonConstraints]
             .forEach { NSLayoutConstraint.activate($0) }
     }
 }
@@ -88,12 +88,12 @@ class TasksTableViewCell: UITableViewCell {
 // MARK: - Configure with model function
 extension TasksTableViewCell {
    
-    public func configure(with model: Task) {
+    public func configure(with model: CDTasks) {
         
         taskNameLbl.text = model.name
         
-        model.isComplieted ?? false
-        ? complitedButton.setBackgroundImage(UIImage(systemName: "checkmark.square"), for: .normal)
-        : complitedButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
+        model.isCompleted
+        ? completedButton.setBackgroundImage(UIImage(systemName: "checkmark.square"), for: .normal)
+        : completedButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
     }
 }

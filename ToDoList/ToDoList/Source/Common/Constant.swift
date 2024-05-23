@@ -10,13 +10,13 @@ import Foundation
 enum Constant {
     
     // Height
-    static let iconHeight: CGFloat = 30.0 // complitedButton
+    static let iconHeight: CGFloat = 30.0 // completedButton
     static let lblHeight: CGFloat = 30.0 // taskNameLbl,
     static let buttonHeight: CGFloat = 44.0 // createButton, removeCompletedButton
     static let taskNameFieldHeight: CGFloat = 50.0 // taskNameField
     
     // Width
-    static let iconWidth: CGFloat = 30.0 // complitedButton
+    static let iconWidth: CGFloat = 30.0 // completedButton
     
     // Multiplier
     static let buttonWidthMultiplier: CGFloat = 0.5 // createButton, removeCompletedButton
@@ -25,8 +25,8 @@ enum Constant {
    
     // Offsets
     static let leadingOffset: CGFloat = 16.0 // taskNameLbl
-    static let trailingOffset: CGFloat = -16.0 // complitedButton
-    static let complitedButtonLeadingOffset: CGFloat = 20.0 // complitedButton
+    static let trailingOffset: CGFloat = -16.0 // completedButton
+    static let completedButtonLeadingOffset: CGFloat = 20.0 // completedButton
     static let taskNameFieldTopOffset: CGFloat = 20.0 // taskNameFieldTopOffset
     static let createButtonTopOffset: CGFloat = 50.0 // createButton
     static let textFieldPadding: CGFloat = 20.0 // taskNameField

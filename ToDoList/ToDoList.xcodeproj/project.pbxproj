@@ -7,13 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C45B1292BFF5F5300FC8B20 /* ToDoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6C45B1272BFF5F5300FC8B20 /* ToDoList.xcdatamodeld */; };
+		6C45B1342BFF605800FC8B20 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C45B1302BFF605800FC8B20 /* CoreDataService.swift */; };
+		6C45B1352BFF605800FC8B20 /* CoreDataService+Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C45B1312BFF605800FC8B20 /* CoreDataService+Task.swift */; };
+		6C45B1382BFF611E00FC8B20 /* CDTasks+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C45B1362BFF611E00FC8B20 /* CDTasks+CoreDataClass.swift */; };
+		6C45B1392BFF611E00FC8B20 /* CDTasks+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C45B1372BFF611E00FC8B20 /* CDTasks+CoreDataProperties.swift */; };
 		6C61BE392BFE2D4800742137 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C61BE382BFE2D4800742137 /* AppDelegate.swift */; };
 		6C61BE3B2BFE2D4800742137 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C61BE3A2BFE2D4800742137 /* SceneDelegate.swift */; };
 		6C61BE3D2BFE2D4800742137 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C61BE3C2BFE2D4800742137 /* TasksViewController.swift */; };
 		6C61BE422BFE2D4D00742137 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C61BE412BFE2D4D00742137 /* Assets.xcassets */; };
 		6C61BE452BFE2D4D00742137 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 6C61BE442BFE2D4D00742137 /* Base */; };
 		6C61BE562BFE302500742137 /* UITextFieldExtansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C61BE542BFE302500742137 /* UITextFieldExtansion.swift */; };
-		6C61BE592BFE305D00742137 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C61BE572BFE305C00742137 /* Task.swift */; };
 		6C61BE5B2BFE30B700742137 /* TasksViewController+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C61BE5A2BFE30B600742137 /* TasksViewController+Table.swift */; };
 		6C61BE5D2BFE30E300742137 /* TasksViewController+Servise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C61BE5C2BFE30E200742137 /* TasksViewController+Servise.swift */; };
 		6C61BE602BFE311300742137 /* TasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C61BE5E2BFE311200742137 /* TasksTableViewCell.swift */; };
@@ -22,6 +26,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C45B1282BFF5F5300FC8B20 /* ToDoList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoList.xcdatamodel; sourceTree = "<group>"; };
+		6C45B1302BFF605800FC8B20 /* CoreDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		6C45B1312BFF605800FC8B20 /* CoreDataService+Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreDataService+Task.swift"; sourceTree = "<group>"; };
+		6C45B1362BFF611E00FC8B20 /* CDTasks+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTasks+CoreDataClass.swift"; sourceTree = "<group>"; };
+		6C45B1372BFF611E00FC8B20 /* CDTasks+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTasks+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6C61BE352BFE2D4800742137 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C61BE382BFE2D4800742137 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6C61BE3A2BFE2D4800742137 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,7 +39,6 @@
 		6C61BE442BFE2D4D00742137 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6C61BE462BFE2D4D00742137 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C61BE542BFE302500742137 /* UITextFieldExtansion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldExtansion.swift; sourceTree = "<group>"; };
-		6C61BE572BFE305C00742137 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		6C61BE5A2BFE30B600742137 /* TasksViewController+Table.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TasksViewController+Table.swift"; sourceTree = "<group>"; };
 		6C61BE5C2BFE30E200742137 /* TasksViewController+Servise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TasksViewController+Servise.swift"; sourceTree = "<group>"; };
 		6C61BE5E2BFE311200742137 /* TasksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksTableViewCell.swift; sourceTree = "<group>"; };
@@ -49,6 +57,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C45B12E2BFF601000FC8B20 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6C45B12F2BFF601A00FC8B20 /* CoreData */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6C45B12F2BFF601A00FC8B20 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				6C45B1362BFF611E00FC8B20 /* CDTasks+CoreDataClass.swift */,
+				6C45B1372BFF611E00FC8B20 /* CDTasks+CoreDataProperties.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		6C45B1322BFF605800FC8B20 /* CoreDataService */ = {
+			isa = PBXGroup;
+			children = (
+				6C45B1302BFF605800FC8B20 /* CoreDataService.swift */,
+				6C45B1312BFF605800FC8B20 /* CoreDataService+Task.swift */,
+			);
+			path = CoreDataService;
+			sourceTree = "<group>";
+		};
+		6C45B1332BFF605800FC8B20 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6C45B1322BFF605800FC8B20 /* CoreDataService */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		6C61BE2C2BFE2D4800742137 = {
 			isa = PBXGroup;
 			children = (
@@ -68,10 +110,9 @@
 		6C61BE372BFE2D4800742137 /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
-				6C61BE552BFE302500742137 /* Extansion */,
-				6C61BE582BFE305C00742137 /* Common */,
 				6C61BE4C2BFE2DD000742137 /* Source */,
 				6C61BE4D2BFE2DE900742137 /* Resource */,
+				6C45B1272BFF5F5300FC8B20 /* ToDoList.xcdatamodeld */,
 			);
 			path = ToDoList;
 			sourceTree = "<group>";
@@ -79,7 +120,10 @@
 		6C61BE4C2BFE2DD000742137 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				6C61BE552BFE302500742137 /* Extansion */,
+				6C61BE582BFE305C00742137 /* Common */,
 				6C61BE4F2BFE2E3300742137 /* Module */,
+				6C45B1332BFF605800FC8B20 /* Service */,
 				6C61BE4E2BFE2E0900742137 /* AppDelegate */,
 			);
 			path = Source;
@@ -159,8 +203,8 @@
 		6C61BE582BFE305C00742137 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				6C61BE572BFE305C00742137 /* Task.swift */,
 				6C61BE662BFE3DB500742137 /* Constant.swift */,
+				6C45B12E2BFF601000FC8B20 /* Models */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -251,12 +295,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C45B1342BFF605800FC8B20 /* CoreDataService.swift in Sources */,
 				6C61BE3D2BFE2D4800742137 /* TasksViewController.swift in Sources */,
 				6C61BE562BFE302500742137 /* UITextFieldExtansion.swift in Sources */,
 				6C61BE5D2BFE30E300742137 /* TasksViewController+Servise.swift in Sources */,
 				6C61BE5B2BFE30B700742137 /* TasksViewController+Table.swift in Sources */,
+				6C45B1382BFF611E00FC8B20 /* CDTasks+CoreDataClass.swift in Sources */,
+				6C45B1392BFF611E00FC8B20 /* CDTasks+CoreDataProperties.swift in Sources */,
+				6C45B1352BFF605800FC8B20 /* CoreDataService+Task.swift in Sources */,
 				6C61BE602BFE311300742137 /* TasksTableViewCell.swift in Sources */,
-				6C61BE592BFE305D00742137 /* Task.swift in Sources */,
+				6C45B1292BFF5F5300FC8B20 /* ToDoList.xcdatamodeld in Sources */,
 				6C61BE392BFE2D4800742137 /* AppDelegate.swift in Sources */,
 				6C61BE672BFE3DB500742137 /* Constant.swift in Sources */,
 				6C61BE632BFE314000742137 /* AddTaskViewController.swift in Sources */,
@@ -473,6 +521,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6C45B1272BFF5F5300FC8B20 /* ToDoList.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6C45B1282BFF5F5300FC8B20 /* ToDoList.xcdatamodel */,
+			);
+			currentVersion = 6C45B1282BFF5F5300FC8B20 /* ToDoList.xcdatamodel */;
+			name = ToDoList.xcdatamodeld;
+			path = /Users/alinavlasenko/ToDoList/ToDoList/ToDoList/ToDoList/ToDoList.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6C61BE2D2BFE2D4800742137 /* Project object */;
 }

@@ -9,7 +9,7 @@ import UIKit
 
 // protocol to get new created task
 protocol SetTasksDelegate {
-    func getTask(task: Task)
+    func getTask()
 }
 
 class AddTaskViewController: UIViewController {
@@ -76,10 +76,12 @@ class AddTaskViewController: UIViewController {
         
         guard let name = name  else { return }
         
+        // save data to CoreData
+        CoreDataService.shared.createItem(name: name)
+        
         // save data to the model
-        let model = Task(name: name)
-        delegateSetTasks?.getTask(task: model)
-
+        delegateSetTasks?.getTask()
+        
         // go to previous screen
         navigationController?.popViewController(animated: false)
         

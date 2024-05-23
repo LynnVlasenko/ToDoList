@@ -38,22 +38,21 @@ extension TasksViewController: UITableViewDataSource, UITableViewDelegate {
         let model = tasks[indexPath.row]
         cell.configure(with: model)
         
-        cell.complitedButtonTabComplition = { [weak self, indexPath] in
+        cell.completedButtonTabComplition = { [weak self, indexPath] in
             guard let self = self else { return }
             
-            let isCompleted = !tasks[indexPath.row].complited()
+            let isCompleted = !(tasks[indexPath.row].isCompleted)
             updateItem(with: isCompleted, at: indexPath.row)
+            CoreDataService.shared.updateIsCompleted(item: model, isCompleted: isCompleted, at: indexPath.row)
             
             if isCompleted {
-                cell.complitedButton.setBackgroundImage(UIImage(systemName: "checkmark.square"), for: .normal)
+                cell.completedButton.setBackgroundImage(UIImage(systemName: "checkmark.square"), for: .normal)
+                CoreDataService.shared.updateIsCompleted(item: model, isCompleted: isCompleted, at: indexPath.row)
                 self.buttonView.isHidden = false
-                isComplietedTasks.append(1)
-                print(isComplietedTasks)
             } else {
-                cell.complitedButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
-                isComplietedTasks.removeLast()
-                print(isComplietedTasks)
-                checkComplitedTask()
+                cell.completedButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
+                checkCompletedTask()
+                CoreDataService.shared.updateIsCompleted(item: model, isCompleted: isCompleted, at: indexPath.row)
             }
         }
         return cell
@@ -70,8 +69,10 @@ extension TasksViewController: UITableViewDataSource, UITableViewDelegate {
                    forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
+            CoreDataService.shared.deleteItem(item: tasks[indexPath.row])
             removeFromTasks(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            checkCompletedTask()
         }
     }
 }

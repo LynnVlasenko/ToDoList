@@ -9,44 +9,56 @@ import UIKit
 
 extension TasksViewController {
     
-    // remove From Tasks Array
+    // get all items
+    func getAllItems() {
+        let storeData = CoreDataService.shared.fetchAllTasks()
+        tasks = storeData
+        print("\n\n getAllItems: \(tasks)")
+        updateUI()
+    }
+    
+    // remove from Tasks Array
     func removeFromTasks(at index: Int) {
         tasks.remove(at: index)
     }
     
-    // update isComplieted
+    // update isCompleted
     func updateItem(with isCompleted: Bool, at index: Int) {
-        tasks[index].isComplieted = isCompleted
+        tasks[index].isCompleted = isCompleted
     }
-    // check Complited Task to Show Remove Button
-    func checkComplitedTask() {
-        
-        if isComplietedTasks.isEmpty {
+    // check Completed Task to Show Remove Button
+    func checkCompletedTask() {
+        var isCompletedTasks = [Bool]()
+        let storeData = CoreDataService.shared.fetchAllTasks()
+        for i in storeData{
+            if i.isCompleted == true {
+                isCompletedTasks.append(i.isCompleted)
+            }
+        }
+        if isCompletedTasks.isEmpty {
             buttonView.isHidden = true
         } else {
             buttonView.isHidden = false
         }
     }
     
-    // remove All Complited Item
-    func removeAllComplitedItem() {
+    // remove All Completed Item
+    func removeAllCompletedItem() {
         
-        tasks.removeAll { tasks in
-            tasks.isComplieted == true
-        }
-        DispatchQueue.main.async {
-            self.tasksTable.reloadData()
-        }
+        CoreDataService.shared.removeAllCompletedItem(in: tasks)
+        getAllItems()
     }
     
     // remove All Tasks
     func removeAllTasks() {
-        
         tasks.removeAll()
-
+        updateUI()
+    }
+    
+    // reload Data
+    func updateUI() {
         DispatchQueue.main.async {
             self.tasksTable.reloadData()
         }
     }
-    
 }

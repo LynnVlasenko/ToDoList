@@ -15,11 +15,8 @@ protocol NewTaskDelegate: AnyObject {
 
 class TasksViewController: UIViewController {
     
-    // array to save data
-    var tasks = [Task]()
-    
-    // aditional array to check if we have Complited Tasks
-    var isComplietedTasks = [Int]()
+    // array to save data to CoreData
+    var tasks = [CDTasks]()
     
     // MARK: - UI
      let tasksTable: UITableView = {
@@ -60,6 +57,10 @@ class TasksViewController: UIViewController {
         addSubviews()
         applyConstraints()
         applyDelegates()
+        // to show data from CoreData
+        getAllItems()
+        // to show button to delete is completed tasks
+        checkCompletedTask()
     }
     
     // MARK: - Add Subviews
@@ -100,24 +101,28 @@ class TasksViewController: UIViewController {
     
     //MARK: - Actions
     @objc func didTapAdd() {
+        
         let vc = AddTaskViewController()
         vc.delegateSetTasks = self
         navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func didTapClean() {
+        
+        CoreDataService.shared.deleteAllItems()
         removeAllTasks()
         buttonView.isHidden = true
     }
     
     @objc private func didTabRemoveCompletedButton() {
-        removeAllComplitedItem()
-        isComplietedTasks.removeAll()
+        
+        removeAllCompletedItem()
         buttonView.isHidden = true
         debugPrint(tasks)
     }
     
     private func applyDelegates() {
+        
         tasksTable.delegate = self
         tasksTable.dataSource = self
     }
@@ -163,11 +168,8 @@ class TasksViewController: UIViewController {
 // MARK: - Extension for Protocol - SetContactsDelegate
 extension TasksViewController: SetTasksDelegate {
        
-    func getTask(task: Task) {
+    func getTask() {
         
-        DispatchQueue.main.async {
-            self.tasks.append(task)
-            self.tasksTable.reloadData()
-        }
+        getAllItems()
     }
 }
