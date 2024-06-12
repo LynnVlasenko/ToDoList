@@ -16,14 +16,13 @@ class AddTaskViewController: UIViewController {
     
     // MARK: - delegates
     var delegateSetTasks: SetTasksDelegate?
-    weak var delegateNewTask: NewTaskDelegate?
     
     var name: String?
     
     // MARK: - UI
     private let taskNameField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Type Name of Task"
+        textField.placeholder = "Enter the new task name"
         textField.setLeftPaddingPoints(Constant.textFieldPadding)
         textField.layer.borderWidth = Constant.textFieldBorderWidth
         textField.layer.borderColor = UIColor.lightGray.cgColor
@@ -89,11 +88,11 @@ class AddTaskViewController: UIViewController {
     }
     
     // Do Enable Create Button Action
-    func enableButton() {
+    private func enableButton() {
         taskNameField.addTarget(self, action: #selector(taskNameTextDidChange(_:)), for: .editingChanged)
     }
     
-    @objc func taskNameTextDidChange(_ textField: UITextField) {
+    @objc private func taskNameTextDidChange(_ textField: UITextField) {
         if let text = textField.text, text.isEmpty {
             createButton.isEnabled = false
             createButton.backgroundColor = .systemGray
@@ -106,7 +105,6 @@ class AddTaskViewController: UIViewController {
     // set up delegates
     private func setupDelegate() {
         taskNameField.delegate = self
-        delegateNewTask = self
     }
     
     //MARK: - Apply constraints
@@ -135,7 +133,7 @@ class AddTaskViewController: UIViewController {
 }
 
 // MARK: - Extension for NewTaskDelegate
-extension AddTaskViewController: NewTaskDelegate {
+extension AddTaskViewController {
     // description of saving the text from the field to an additional variable
     func didTaskNameField(with text: String) {
         name = text
@@ -148,6 +146,6 @@ extension AddTaskViewController: UITextFieldDelegate {
     // implementation of saving text from the field to an additional variable
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let text = textField.text else { return }
-        delegateNewTask?.didTaskNameField(with: text)
+        didTaskNameField(with: text)
     }
 }
