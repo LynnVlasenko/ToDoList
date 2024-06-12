@@ -7,12 +7,6 @@
 
 import UIKit
 
-// MARK: - Protocol to get a new task name fron textField
-protocol NewTaskDelegate: AnyObject {
-    func didTaskNameField(with text: String)
-}
-
-
 class TasksViewController: UIViewController {
     
     // array to save data to CoreData
@@ -101,7 +95,7 @@ class TasksViewController: UIViewController {
     
     //MARK: - Actions
     // add button action
-    @objc func didTapAdd() {
+    @objc private func didTapAdd() {
         
         let vc = AddTaskViewController()
         vc.delegateSetTasks = self
@@ -109,7 +103,7 @@ class TasksViewController: UIViewController {
     }
     
     // clear button action
-    @objc func didTapClean() {
+    @objc private func didTapClean() {
         
         CoreDataService.shared.deleteAllItems()
         removeAllTasks()

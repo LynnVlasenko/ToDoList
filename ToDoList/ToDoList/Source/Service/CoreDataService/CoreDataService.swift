@@ -15,7 +15,7 @@ class CoreDataService: NSObject {
 
     var objectStoreFileName : String
 
-    init(baseFileName : String = "ToDoListTest") {
+    init(baseFileName : String = "ToDoList") {
         self.objectStoreFileName = baseFileName
     }
     
